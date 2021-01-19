@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Times Table</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script type="text/babel">
+    class TimesTable extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          firstNum: Math.ceil(Math.random() * 9),
+          secondNum: Math.ceil(Math.random() * 9),
+          value: "",
+          result: ""
+        };
+      }
+      onSubmit = e => {
+        e.preventDefault();
+
+        if (
+          parseInt(this.state.value) ===
+          this.state.firstNum * this.state.secondNum
+        ) {
+          this.setState(prev => {
+            return {
+              result: "Correct: " + prev.value,
+              firstNum: Math.ceil(Math.random() * 9),
+              secondNum: Math.ceil(Math.random() * 9),
+              value: ""
+            };
+          });
+        } else {
+          this.setState(prev => {
+            return {
+              result: "Wrong: " + this.state.value,
+              value: ""
+            };
+          });
+        }
+        this.input.focus();
+      };
+      onChange = e => this.setState({ value: e.target.value });
+
+      input;
+      // We need to put functions in outside since setState will execute render again
+      // which will lead to create functions every time when rendered if we do not put that outside
+
+      onRef = e => {
+        this.input = e;
+      };
+
+      render() {
+        return (
+          <React.Fragment>
+            <div>
+              {this.state.firstNum} times {this.state.secondNum} ?
+            </div>
+            <form onSubmit={this.onSubmit}>
+              <input
+                type="text"
+                name=""
+                id=""
+                value={this.state.value}
+                onChange={this.onChange}
+                ref={this.onRef}
+              />
+
+              <button>Submit</button>
+            </form>
+
+            <div>{this.state.result}</div>
+          </React.Fragment>
+        );
+        // this.setState will execute render everytime -> 최적화 고려해야한다
+        // onClick = {this.onSubmit} to button is possible too
+      }
+    }
+  </script>
+  <script type="text/babel">
+    ReactDOM.render(<TimesTable />, document.querySelector("#root"));
+    // render is executed when ReactDOM.render
+  </script>
+</html>
