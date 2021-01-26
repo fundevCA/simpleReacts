@@ -1,13 +1,14 @@
 const React = require("react");
+const { useState, useRef } = React;
 
 const Times = () => {
-  const [first, setFirst] = React.useState(Math.ceil(Math.random() * 9));
-  const [second, setSecond] = React.useState(Math.ceil(Math.random() * 9));
-  const [result, setResult] = React.useState("");
-  const [value, setValue] = React.useState("");
+  const [first, setFirst] = useState(Math.ceil(Math.random() * 9));
+  const [second, setSecond] = useState(Math.ceil(Math.random() * 9));
+  const [result, setResult] = useState("");
+  const [value, setValue] = useState("");
   // These has to be in functional component
   // Each set- is their own setState
-  const inputRef = React.useRef(null);
+  const inputRef = useRef(null);
   // This is how to use Ref
 
   const onChangeInput = e => {
@@ -31,7 +32,7 @@ const Times = () => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <div>
         {first} Times {second}?
       </div>
@@ -40,7 +41,7 @@ const Times = () => {
         <button>Submit</button>
       </form>
       <div>{result}</div>
-    </React.Fragment>
+    </>
   );
 };
 
