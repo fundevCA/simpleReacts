@@ -51,7 +51,6 @@ const WordRelay = () => {
       <div>{word}</div>
       <form onSubmit={onSubmit}>
         <label htmlFor="wordInput">
-          {" "}
           Enter Your Word
           <br />
         </label>
