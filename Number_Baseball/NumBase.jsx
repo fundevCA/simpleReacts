@@ -23,11 +23,13 @@ class NumBase extends Component {
     e.preventDefault();
 
     if (value === answer.join("")) {
-      this.setState({
-        result: "HOMERUN!",
-        value: "",
-        answer: getNumbers(),
-        tries: [...tries, { try: value, result: "HOMERUN!" }]
+      this.setState(prev => {
+        return {
+          result: "HOMERUN!",
+          value: "",
+          answer: getNumbers(),
+          tries: [...prev.tries, { try: value, result: "HOMERUN!" }]
+        };
       });
       alert("Congratulation! Let's try another game");
       this.setState({
@@ -47,12 +49,14 @@ class NumBase extends Component {
           } else if (answer.includes(answerArray[i])) ball += 1;
         }
 
-        this.setState({
-          tries: [
-            ...tries,
-            { try: value, result: `${ball} Ball ${strike} Strike` }
-          ],
-          value: ""
+        this.setState(prev => {
+          return {
+            tries: [
+              ...prev.tries,
+              { try: value, result: `${ball} Ball ${strike} Strike` }
+            ],
+            value: ""
+          };
         });
       } else {
         this.setState({

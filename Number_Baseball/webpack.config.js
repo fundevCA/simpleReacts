@@ -3,7 +3,7 @@ const webpack = require("webpack");
 const RefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 module.exports = {
-  name: "NumberBaseball-hooks-setting",
+  name: "NumberBaseball-setting",
   mode: "development",
   devtool: "eval", // hidden-source-map (production)
   resolve: {
